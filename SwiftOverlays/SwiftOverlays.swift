@@ -215,8 +215,10 @@ class SwiftOverlays: NSObject
             }
         )
         
-        if let callback = SwiftOverlays.tapCallback {
-            callback()
+        if let tapRecognizer = sender as? UITapGestureRecognizer {
+            if let callback = SwiftOverlays.tapCallback {
+                callback()
+            }
         }
     }
     
