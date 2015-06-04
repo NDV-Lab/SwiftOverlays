@@ -174,13 +174,15 @@ class SwiftOverlays: NSObject
     }
     
     class func showAnnoyingNotificationOnTopOfStatusBar(notificationView: UIView, duration: NSTimeInterval, tapCallback: SwiftOverlaysTapCallback?) {
-        SwiftOverlays.tapCallback = tapCallback
-        
-        if PrivateStaticVars.bannerWindow == nil {
-            PrivateStaticVars.bannerWindow = UIWindow()
-            PrivateStaticVars.bannerWindow!.windowLevel = UIWindowLevelStatusBar + 1
+
+        if PrivateStaticVars.bannerWindow != nil {
+            return
         }
         
+        SwiftOverlays.tapCallback = tapCallback
+        
+        PrivateStaticVars.bannerWindow = UIWindow()
+        PrivateStaticVars.bannerWindow!.windowLevel = UIWindowLevelStatusBar + 1
         PrivateStaticVars.bannerWindow!.frame = CGRectMake(0, 0, UIScreen.mainScreen().bounds.size.width, notificationView.frame.size.height)
         PrivateStaticVars.bannerWindow!.hidden = false
         
@@ -212,6 +214,7 @@ class SwiftOverlays: NSObject
                 notificationView!.removeFromSuperview()
                 
                 PrivateStaticVars.bannerWindow!.hidden = true
+                PrivateStaticVars.bannerWindow = nil
             }
         )
         
