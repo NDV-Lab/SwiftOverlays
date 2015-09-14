@@ -208,7 +208,7 @@ class SwiftOverlays: NSObject
         UIView.animateWithDuration(Statics.bannerDissapearAnimationDuration,
             animations: { () -> Void in
                 let frame = notificationView!.frame
-                notificationView!.frame = frame.rectByOffsetting(dx: 0, dy: -frame.size.height)
+                notificationView!.frame = frame.offsetBy(dx: 0, dy: -frame.size.height)
             },
             completion: { (finished) -> Void in
                 notificationView!.removeFromSuperview()
@@ -218,7 +218,7 @@ class SwiftOverlays: NSObject
             }
         )
         
-        if let tapRecognizer = sender as? UITapGestureRecognizer {
+        if let _ = sender as? UITapGestureRecognizer {
             if let callback = SwiftOverlays.tapCallback {
                 callback()
             }
